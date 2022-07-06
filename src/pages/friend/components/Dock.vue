@@ -1,5 +1,5 @@
 <template>
-      <div class="contents">
+      <div class="dock">
          <router-link to="/">
             <div class="content">
                <span class="material-icons">home</span>
@@ -35,32 +35,37 @@
 
 <script>
 export default {
-    name: 'HomeContents'
+    name: 'HomeDock'
 }
 </script>
 
 <style lang="sass" scoped>
-    .contents
-        border-top: 0.01rem #D3D3D3	solid
+     .dock
+        border-top: 0.01rem #E7E3E3 solid
         position: fixed
         bottom: 0
         height:1.38rem
         width: 100%
-
+        z-index: 101
+        background-color: white
+        & > a 
+          &.router-link-active 
+            .material-icons 
+                color: #FFD400
         .content 
             float: left 
             width: 20%
             display: flex 
             flex-direction: column
             .material-icons 
-                font-size: 0.8rem
+                font-size: 0.6rem
                 padding: 0.1rem
                 margin: auto
-                &.router-link-active 
-                  color:#FFD400
+                color: black
             .content-text 
                 line-height: 0.2rem
                 height: 0.2rem
                 font-weight: bold
                 margin: auto
+                color: black
 </style>

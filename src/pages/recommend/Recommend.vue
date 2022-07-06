@@ -15,6 +15,9 @@
             <div class="q-pa-md  items-start q-gutter-md shop-item">
             <q-card class="my-card">
                 <q-img src="https://cdn.quasar.dev/img/chicken-salad.jpg" />
+                <span class="material-icons heart">
+                    favorite
+                </span>
                 <q-card-section >
                 <q-btn
                 round
@@ -139,6 +142,12 @@ export default {
             font-size: 0.6rem
     .shop-item
         .my-card
+            .heart
+                position: absolute
+                top: 0 
+                right: 0
+                font-size: 0.5rem
+                
             .q-img
                 height: 3.5rem 
         .distance 
