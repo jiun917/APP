@@ -15,13 +15,15 @@
           <div class="user">
               <img class="user-img" src="https://picsum.photos/79/76">
           </div>
-          <div class="input">
-              <q-input class="input-search" bg-color="white" dense rounded outlined  disable label="搜尋餐廳"   >
-                  <template v-slot:append>
-                    <q-icon name="search" />
-                  </template>
-              </q-input>
-          </div>
+          <router-link to="/search">
+            <div class="input">
+                <q-input class="input-search" bg-color="white" dense rounded outlined  disable label="搜尋餐廳"   >
+                    <template v-slot:append>
+                        <q-icon name="search" />
+                    </template>
+                </q-input>
+            </div>
+          </router-link>
       </div>
 </template>
 

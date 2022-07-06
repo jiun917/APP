@@ -7,18 +7,24 @@
 </template>
 
 <script>
+
 export default {
   name: "MapTgos",
   data () {
     return {
-      imgUrl: "https://api.tgos.tw/TGOS_API/images/marker2.png"
+      imgUrl: "https://api.tgos.tw/TGOS_API/images/marker2.png",
+      location: null,
+      twd97x: null,
+      twd97y: null,
+      
     }
   },
   methods: {
     InitWnd() {
       /* eslint-disable */
+      
       var pMap
-      var markerPoint = new TGOS.TGPoint(303895, 2773227)
+      var markerPoint = new TGOS.TGPoint( this.twd97x,this.twd97y )
       var pOMap = document.getElementById("OMap");
       var mapOptiions = {
         scaleControl: false, //不顯示比例尺
@@ -40,12 +46,39 @@ export default {
     },
     clickpoint () {
       console.log('aa')
+    },
+    async getLocation() {
+      return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(position => {
+          resolve(position);
+        }, err =>{
+          reject(err);
+        })
+      })
+    },
+    async locateMe() {
+      try{
+        this.location = await this.getLocation()
+        this.latitude = this.location.coords.latitude
+        this.longitude = this.location.coords.longitude
+      } catch(e) {
+        console.log("error")
+      }
+    },
+    changelocation() {
+      var changeinfo = new TGOS.TGTransformation()
+      changeinfo.wgs84totwd97(this.location.coords.longitude,this.location.coords.latitude)
+      this.twd97x = changeinfo.transResult.x 
+      this.twd97y = changeinfo.transResult.y
     }
   },
-  mounted() {
-    this.InitWnd();
-  },
-};
+  
+  async mounted() {
+     await this.locateMe()
+     await this.changelocation()
+     await this.InitWnd()
+  }
+}
 </script>
 
 <style lang="sass" scoped>
