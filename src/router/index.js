@@ -7,6 +7,7 @@ import OrderPage from '@/pages/order/Order.vue'
 import PopularPage from '@/pages/popular/Popular.vue'
 import RecommendPage from '@/pages/recommend/Recommend.vue'
 import SearchPage from '@/pages/search/Search.vue'
+import ShopPage from '@/pages/shop/Shop.vue'
 const routes = [
   {
     path: '/',
@@ -47,6 +48,11 @@ const routes = [
     path: '/search',
     name: 'search',
     component: SearchPage
+  },
+  {
+    path: '/shop',
+    name: 'shop',
+    component: ShopPage
   }
   // {
   //   path: '/about',

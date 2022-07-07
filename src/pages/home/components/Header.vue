@@ -70,7 +70,7 @@ export default {
                 top: 0
         .user 
             position: absolute 
-            border: solid 0.01rem black
+            border: solid 0.01rem white
             border-radius: 100%
             top: 1.38rem
             right: 0.52rem
