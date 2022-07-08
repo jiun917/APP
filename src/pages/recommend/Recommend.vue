@@ -13,6 +13,15 @@
         style="height: 15rem; width: 100%;"
         >
             <div class="q-pa-md  items-start q-gutter-md shop-item">
+ shopInformation_header
+                <q-card class="my-card">
+                    <q-img src="https://cdn.quasar.dev/img/chicken-salad.jpg" />
+                    <span class="material-icons heart" 
+                        :class="{ like: islike}"
+                        @click="this.click_like()"
+                        >
+                        favorite
+
             <q-card class="my-card">
                 <q-img src="https://cdn.quasar.dev/img/chicken-salad.jpg" />
                 <span class="material-icons heart">
@@ -33,14 +42,32 @@
                     <span class="text-bold grade">5.0</span>
                     <span class="material-icons icon-start">
                         star
+ master
                     </span>
-                </div>
-                <div class="distance text-grey ellipsis /">
-                    2分鐘, 950公尺
-                </div>
-                </q-card-section>
-            </q-card>
+                    <q-card-section >
+                    <q-btn
+                    round
+                    color="yellow"
+                    icon="place"
+                    class="absolute"
+                    style="top: 0; right: 0.24rem; transform: translateY(-80%)"
+                    />
+                    <div class="row no-wrap items-center">
+                        <div class="col  ellipsis text-bold">
+                        肯德基
+                        </div>
+                        <span class="text-bold grade">5.0</span>
+                        <span class="material-icons icon-start">
+                            star
+                        </span>
+                    </div>
+                    <div class="distance text-grey ellipsis /">
+                        2分鐘, 950公尺
+                    </div>
+                    </q-card-section>
+                </q-card>
             </div>
+
             <div class="q-pa-md  items-start q-gutter-md shop-item">
             <q-card class="my-card">
                 <q-img src="https://cdn.quasar.dev/img/chicken-salad.jpg" />
@@ -125,7 +152,17 @@
 
 <script>
 export default {
-    name:'RecommendPage'
+    name:'RecommendPage',
+    data()  {
+        return {
+            islike:false
+        }
+    },
+    methods: {
+        click_like() {
+            this.islike = !this.islike
+        }
+    }
 }
 </script>
 
@@ -152,9 +189,14 @@ export default {
                 height: 3.5rem 
         .distance 
             margin-top: 0.1rem
-        .material-icons
+        .icon-start
             color: #FFD400
             font-size: 0.35rem
+        .heart 
+            font-size: 0.35rem 
+            color: #F5F5F5	
+        .like
+            color: #FFD400
     .scroll
         
         top: 0.2rem

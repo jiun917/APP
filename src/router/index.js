@@ -7,6 +7,10 @@ import OrderPage from '@/pages/order/Order.vue'
 import PopularPage from '@/pages/popular/Popular.vue'
 import RecommendPage from '@/pages/recommend/Recommend.vue'
 import SearchPage from '@/pages/search/Search.vue'
+ shopInformation_header
+import ShopPage from '@/pages/shop/Shop.vue'
+
+ master
 const routes = [
   {
     path: '/',
@@ -47,6 +51,14 @@ const routes = [
     path: '/search',
     name: 'search',
     component: SearchPage
+ shopInformation_header
+  },
+  {
+    path: '/shop',
+    name: 'shop',
+    component: ShopPage
+
+ master
   }
   // {
   //   path: '/about',
