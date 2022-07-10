@@ -175,7 +175,6 @@ export default {
         .like
             color: #FFD400
     .scroll
-        
         top: 0.2rem
         bottom: 1.28rem
         
