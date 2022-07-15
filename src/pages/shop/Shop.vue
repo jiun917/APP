@@ -63,24 +63,28 @@
             </div>
             <q-scroll-area
             class="rounded-borders scroll"
-            style="height: 8.64rem; width: 100%;"
+            style="height: 55vh; width: 100%;"
             >
-                <div class="goods_list" @click="selectgoods">
+                <div 
+                v-for="(item,index) in goods"
+                :key="index"
+                class="goods_list"  
+                @click="this.selectIndex(index)">
                     <div class="goods_circle">
                         <img class="goods_img" src="https://picsum.photos/106/123">
                     </div>
                     <div class="goods_info">
-                        <div class="goods_name">原味蛋塔</div>
-                        <div class="goods_introduce">蛋塔外酥內嫩好風味蛋塔外酥內嫩好風味蛋塔外酥內嫩好風味</div>
-                        <div class="goods_rating">
+                        <div class="goods_name">{{item.name}}</div>
+                        <div class="goods_introduce">{{item.introduce}}</div>
+                    </div>
+                    <div class="goods_rating">
                             <div class="rating">
                                 <span class="material-icons icon-start">
                                     star
                                 </span>
-                                <span>5.0</span>
+                                <span>{{item.rating}}</span>
                             </div>
-                            <div class="good_price">$39</div>
-                        </div>
+                            <div class="good_price">${{item.price}}</div>
                     </div>
                 </div>
             </q-scroll-area>
@@ -91,7 +95,7 @@
             </div>
         </div>
     </div>
-    <shop-goods :isselectgoods="isselectgoods" @goback="getgoback"></shop-goods>
+    <shop-goods :goodsItem="selectgoods" :options="option" :isselectgoods="isselectgoods" @goback="getgoback"></shop-goods>
     
 </template>
 
@@ -106,7 +110,76 @@ export default {
             select_r: true,
             select_p: false,
             select_c: false,
-            isselectgoods:false
+            isselectgoods:false,
+            selectgoods: [],
+            option:[],
+            goods:[
+                {name:'原味蛋塔',introduce:'蛋塔外酥內嫩',price:'39',rating:4,isselect:true,
+                    options:[
+                        [
+                            { name:"選擇1",label: '選項11', value: '11',color: 'yellow' },
+                            { name:"選擇1",label: '選項12', value: '12',color: 'yellow' },
+                            { name:"選擇1",label: '選項13', value: '13',color: 'yellow' }
+                        ], 
+                        [
+                            { name:"選擇2",label: '選項21', value: '21', color: 'yellow' },
+                            { name:"選擇2",label: '選項22', value: '22', color: 'yellow' },
+                            { name:"選擇2",label: '選項23', value: '23', color: 'yellow' }
+                        ]
+                    ]},
+                {name:'紐澳良烤全雞',introduce:'香嫩多汁，雞巴毛',price:'250',rating:5,isselect:true,
+                    options:[
+                        [
+                            { name:"選擇1",label: '選項11', value: '11',color: 'yellow' },
+                            { name:"選擇1",label: '選項12', value: '12',color: 'yellow' },
+                            { name:"選擇1",label: '選項13', value: '13',color: 'yellow' }
+                        ], 
+                        [
+                            { name:"選擇2",label: '選項21', value: '21', color: 'yellow' },
+                            { name:"選擇2",label: '選項22', value: '22', color: 'yellow' },
+                            { name:"選擇2",label: '選項23', value: '23', color: 'yellow' }
+                        ],
+                    ]},
+                {name:'義式香草紙包雞',introduce:'香噴噴，從義大利空運來台',price:'900',rating:3,isselect:true,
+                    options:[
+                        [
+                            { name:"選擇1",label: '選項11', value: '11',color: 'yellow' },
+                            { name:"選擇1",label: '選項12', value: '12',color: 'yellow' },
+                            { name:"選擇1",label: '選項13', value: '13',color: 'yellow' }
+                        ], 
+                        [
+                            { name:"選擇2",label: '選項21', value: '21', color: 'yellow' },
+                            { name:"選擇2",label: '選項22', value: '22', color: 'yellow' },
+                            { name:"選擇2",label: '選項23', value: '23', color: 'yellow' }
+                        ],
+                    ]},
+                {name:'烤滷豬',introduce:'小火慢烤，低溫熟成',price:'3000',rating:4,isselect:true,
+                    options:[
+                        [
+                            { name:"選擇1",label: '選項11', value: '11',color: 'yellow' },
+                            { name:"選擇1",label: '選項12', value: '12',color: 'yellow' },
+                            { name:"選擇1",label: '選項13', value: '13',color: 'yellow' }
+                        ], 
+                        [
+                            { name:"選擇2",label: '選項21', value: '21', color: 'yellow' },
+                            { name:"選擇2",label: '選項22', value: '22', color: 'yellow' },
+                            { name:"選擇2",label: '選項23', value: '23', color: 'yellow' }
+                        ],
+                    ]},
+                {name:'薯條',introduce:'馬鈴薯做的',price:'45',rating:5,isselect:true,
+                    options:[
+                        [
+                            { name:"選擇1",label: '選項11', value: '11',color: 'yellow' },
+                            { name:"選擇1",label: '選項12', value: '12',color: 'yellow' },
+                            { name:"選擇1",label: '選項13', value: '13',color: 'yellow' }
+                        ], 
+                        [
+                            { name:"選擇2",label: '選項21', value: '21', color: 'yellow' },
+                            { name:"選擇2",label: '選項22', value: '22', color: 'yellow' },
+                            { name:"選擇2",label: '選項23', value: '23', color: 'yellow' }
+                        ],
+                    ]}
+            ]
         }
     },
     components: {
@@ -127,8 +200,11 @@ export default {
             else
                 this.select_c = true
         },
-        selectgoods() {
+        selectIndex(index) {
             this.isselectgoods = true
+            this.selectgoods = this.goods[index]
+            this.option = this.goods[index].options
+            
         },
         getgoback(select) {
             this.isselectgoods = select
@@ -201,7 +277,6 @@ export default {
                             background-color: #D3D3D380
 
                 .icon
-                    
                     border-radius: 100%
                     background-color: #fff
                     overflow: hidden
@@ -250,6 +325,7 @@ export default {
             border-radius: 0.3rem
             display: flex
             flex-direction: row
+            justify-content: flex-start
             padding: 0.3rem
             .goods_circle
                 flex-shrink: 0
@@ -263,24 +339,33 @@ export default {
             .goods_info 
                 display: flex
                 flex-direction: column
-                justify-content: space-between
+                margin: 0 0.3rem
                 .goods_name
                     font-size: 0.5rem
+                    margin-bottom: 0.3rem
                 .goods_introduce
                     flex-wrap: wrap
                     color: grey
-                .goods_rating
+            .goods_rating
+                position: absolute
+                right: 0
+                padding-right: 0.5rem
+                display: flex
+                flex-direction: column
+                align-self: flex-end
+                justify-content: flex-end
+                .rating
                     display: flex
-                    flex-direction: column
-                    align-self: flex-end
-                    align-content: center
+                    flex-direction: row
+                    justify-content: flex-end
+                    align-items: center
                     .icon-start
                         font-size: 0.45rem
                         margin-right: 0.1rem
                         color: #FFBD09
-                    .good_price
-                        font-size: 0.4rem
-                        color: #FFBD09
-                        font-weight: bold
+                .good_price
+                    font-size: 0.4rem
+                    color: #FFBD09
+                    font-weight: bold
  
 </style>
