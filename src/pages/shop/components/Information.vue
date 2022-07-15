@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div class="shopinfo">
         <div class="header">
             <div class="header_1">
@@ -58,66 +58,11 @@
                 >
                     受歡迎
                 </div>
-                <div 
-                class="combo circle"
-                :class="{select: select_c}"
-                @click="this.select('c')"
-                >
-                    套餐
-                </div>
             </div>
             <q-scroll-area
             class="rounded-borders scroll"
             style="height: 8.64rem; width: 100%;"
             >
-                <div class="goods_list">
-                    <div class="goods_img"></div>
-                    <div class="goods_info">
-                        <div class="goods_name">原味蛋塔</div>
-                        <div class="goods_introduce">蛋塔外酥內嫩好風味蛋塔外酥內嫩好風味蛋塔外酥內嫩好風味</div>
-                        <div class="goods_rating">
-                            <div class="rating">
-                                <span class="material-icons icon-start">
-                                    star
-                                </span>
-                                <span>5.0</span>
-                            </div>
-                            <div class="good_price">$39</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="goods_list">
-                    <div class="goods_img"></div>
-                    <div class="goods_info">
-                        <div class="goods_name">原味蛋塔</div>
-                        <div class="goods_introduce">蛋塔外酥內嫩好風味蛋塔外酥內嫩好風味蛋塔外酥內嫩好風味</div>
-                        <div class="goods_rating">
-                            <div class="rating">
-                                <span class="material-icons icon-start">
-                                    star
-                                </span>
-                                <span>5.0</span>
-                            </div>
-                            <div class="good_price">$39</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="goods_list">
-                    <div class="goods_img"></div>
-                    <div class="goods_info">
-                        <div class="goods_name">原味蛋塔</div>
-                        <div class="goods_introduce">蛋塔外酥內嫩好風味蛋塔外酥內嫩好風味蛋塔外酥內嫩好風味</div>
-                        <div class="goods_rating">
-                            <div class="rating">
-                                <span class="material-icons icon-start">
-                                    star
-                                </span>
-                                <span>5.0</span>
-                            </div>
-                            <div class="good_price">$39</div>
-                        </div>
-                    </div>
-                </div>
                 <div class="goods_list">
                     <div class="goods_img"></div>
                     <div class="goods_info">
@@ -152,7 +97,8 @@ export default {
             islike: false,
             select_r: true,
             select_p: false,
-            select_c: false
+            select_c: false,
+            isselectgoods:false
         }
     },
     methods: {
@@ -169,8 +115,7 @@ export default {
                 this.select_p = true 
             else
                 this.select_c = true
-
-        }
+        },
     }
 }
 </script>
@@ -262,7 +207,7 @@ export default {
             font-size: 0.3rem
             display: flex
             flex-direction: row
-            justify-content: space-between
+            justify-content: space-around
             margin: 0.36rem 0.52rem 0 0.6rem
             .circle
                 padding: 0.2rem
@@ -299,7 +244,7 @@ export default {
                     display: flex
                     flex-direction: column
                     align-self: flex-end
-                    align-items:center
+                    align-content: center
                     .icon-start
                         font-size: 0.45rem
                         margin-right: 0.1rem
@@ -308,8 +253,5 @@ export default {
                         font-size: 0.4rem
                         color: #FFBD09
                         font-weight: bold
-        
-                    
-                    
-                
-</style>
+ 
+</style> -->
