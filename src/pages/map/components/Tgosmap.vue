@@ -22,7 +22,6 @@ export default {
   methods: {
     InitWnd() {
       /* eslint-disable */
-      
       var pMap
       var markerPoint = new TGOS.TGPoint( this.twd97x,this.twd97y )
       var pOMap = document.getElementById("OMap");
@@ -63,6 +62,7 @@ export default {
         this.longitude = this.location.coords.longitude
       } catch(e) {
         console.log("error")
+        console.log(e)
       }
     },
     changelocation() {
