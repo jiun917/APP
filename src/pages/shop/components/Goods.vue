@@ -13,8 +13,8 @@
         </div>
         <div class="goods_detail">
             <div class="goods_detail_header">
-                <div class="goods_">原味蛋塔</div>
-                <div class="goods_price">$39</div>
+                <div class="goods_">{{goodsItem.name}}</div>
+                <div class="goods_price">${{goodsItem.price}}</div>
             </div>
             <div class="divider"></div>
             <div class="goods_select_list">
@@ -54,7 +54,10 @@
 </transition>
 </template>
 
+
 <script>
+
+
 export default {
     name: 'ShopGoods',
     data() {
@@ -64,34 +67,15 @@ export default {
             alert: false,
             selected: [],
             select: [],
-             options: [
-                [
-                    { name:"選擇1",label: '選項11', value: '11',color: 'yellow' },
-                    { name:"選擇1",label: '選項12', value: '12',color: 'yellow' },
-                    { name:"選擇1",label: '選項13', value: '13',color: 'yellow' }
-                ], 
-                [
-                    { name:"選擇2",label: '選項21', value: '21', color: 'yellow' },
-                    { name:"選擇2",label: '選項22', value: '22', color: 'yellow' },
-                    { name:"選擇2",label: '選項23', value: '23', color: 'yellow' }
-                ],
-                [
-                    { name:"選擇3",label: '選項31', value: '31', color: 'yellow' },
-                    { name:"選擇3",label: '選項32', value: '32', color: 'yellow' },
-                    { name:"選擇3",label: '選項33', value: '33', color: 'yellow' }
-                ],
-                [
-                    { name:"選擇4",label: '選項41', value: '41', color: 'yellow' },
-                    { name:"選擇4",label: '選項42', value: '42', color: 'yellow' },
-                    { name:"選擇4",label: '選項43', value: '43', color: 'yellow' }
-                ]
-            ]
         }
     },
     props: {
+        goodsItem: Object,
+        options: Array,
         isselectgoods: Boolean
     },
-    methods: {
+    
+    methods: { 
         isgoback() {
             this.$emit("goback",this.goback) 
         },
@@ -194,6 +178,7 @@ export default {
                         .shopcart_btn
                             position: absolute
                             right:0
+                            font-weight: bold
                 .listname
                     font-size: 0.4rem
          
