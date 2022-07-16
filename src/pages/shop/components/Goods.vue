@@ -30,6 +30,19 @@
                         </q-option-group>
                     </div>
                     <div class="shopcart">
+                        <div class="decrease" :class="{noclick:goodscount<=1}" @click="cutgoodsconut">
+                            <span class="material-icons">
+                                remove_circle_outline
+                            </span>
+                        </div>
+                        <div class="goodscount"  >
+                            {{goodscount}}
+                        </div>
+                        <div class="increase"  @click="addgoodsconut">
+                            <span class="material-icons">
+                                add_circle_outline
+                            </span>
+                        </div>
                         <q-btn class="shopcart_btn" label="加到購物車" type="submit" color="yellow" />
                     </div>
                 </q-form>
@@ -67,6 +80,7 @@ export default {
             alert: false,
             selected: [],
             select: [],
+            goodscount: 1,
         }
     },
     props: {
@@ -77,13 +91,16 @@ export default {
     
     methods: { 
         isgoback() {
-            this.$emit("goback",this.goback) 
+            this.select=[]
+            this.goodscount=1
+            this.$emit("addshopcart",this.selected.length) 
         },
         onSubmit(evt) {
             const formData = new FormData(evt.target)
             const submitResult = []
             this.alert = false
             this.submitEmpty = false
+            submitResult.push(this.goodsItem.name,this.goodscount)
             for(const [name,value] of formData.entries()) {
                 submitResult.push({
                     name,
@@ -93,7 +110,6 @@ export default {
            
             for(var i=0;i<this.options.length;i++)
             {
-                
                 if(!this.select[i])
                 {
                     this.alert = true
@@ -109,9 +125,17 @@ export default {
                 this.alert = false
                 this.submitEmpty = false
                 this.select = []
-                this.$emit("goback",this.goback) 
+                this.goodscount = 1
+                this.$emit("addshopcart",this.selected.length) 
                 console.log(this.selected)
             }
+        },
+        addgoodsconut() {
+            this.goodscount++
+        },
+        cutgoodsconut() {
+            if(this.goodscount>1)
+                this.goodscount--
         }
     }
         
@@ -130,7 +154,7 @@ export default {
         background-color: #fff
         z-index: 101
         width: 100%
-        height:100%
+        height:18rem
         .goods_header
             margin: 0.1rem
             .goods_img_div
@@ -175,9 +199,23 @@ export default {
                 .form
                     .shopcart
                         position: relative
+                        display: flex 
+                        flex-direction: row
+                        align-content: center
+                        .increase,.decrease
+                            font-size: 0.6rem
+                            color: #FFBD09
+                            margin-right: 0.3rem
+                            &.noclick
+                                color: #C0C0C0
+                        .goodscount
+                            margin-right: 0.3rem
+                            font-size: 0.4rem
+                            align-self: center
                         .shopcart_btn
+                            align-self: center
                             position: absolute
-                            right:0
+                            right: 0
                             font-weight: bold
                 .listname
                     font-size: 0.4rem
