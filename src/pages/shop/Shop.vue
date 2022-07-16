@@ -89,13 +89,21 @@
                 </div>
             </q-scroll-area>
         </div>
+
         <div class="shopCart">
-            <div class="word">
-                前往購物車
-            </div>
+            <div class="shopcartnum" v-show="shopcartnum>0">
+                <span class="number">{{shopcartnum}}</span>
+            </div> 
+            <div class="word">前往購物車</div>
         </div>
+
+        <shop-goods 
+        :goodsItem="selectgoods" 
+        :options="option" 
+        :isselectgoods="isselectgoods" 
+        @addshopcart="addshopcart">
+        </shop-goods>
     </div>
-    <shop-goods :goodsItem="selectgoods" :options="option" :isselectgoods="isselectgoods" @goback="getgoback"></shop-goods>
     
 </template>
 
@@ -113,6 +121,7 @@ export default {
             isselectgoods:false,
             selectgoods: [],
             option:[],
+            shopcartnum:'',
             goods:[
                 {name:'原味蛋塔',introduce:'蛋塔外酥內嫩',price:'39',rating:4,isselect:true,
                     options:[
@@ -206,8 +215,9 @@ export default {
             this.option = this.goods[index].options
             
         },
-        getgoback(select) {
-            this.isselectgoods = select
+        addshopcart(shopcart) {
+            this.isselectgoods = false
+            this.shopcartnum = shopcart
         }
     }
 }
@@ -217,13 +227,30 @@ export default {
     .shopinfo
         background-color: #F5F5F5
         .shopCart
+            position: relative
             margin: 0.68rem 0.68rem 0 0.68rem
             border-radius: 0.3rem 
             background-color: #FFBD09
             height: 0.66rem
             display: flex
+            flex-direction: row
             justify-content: center
             align-items: center
+            .shopcartnum
+                position: absolute
+                left: 0.1rem
+                background-color: white
+                width: 0.5rem 
+                height: 0.5rem
+                border-radius: 100%
+                text-align: center
+                color: #FFBD09
+                font-size: 0.4rem
+                .number
+                    position: absolute
+                    top: 50%
+                    left: 50%
+                    transform: translate(-50%,-50%)
             .word
                 color: #fff
                 font-weight: bold
