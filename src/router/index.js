@@ -51,11 +51,13 @@ const routes = [
     path: '/search',
     name: 'search',
     component: SearchPage
+ shopInformation_header
   },
   {
     path: '/shop',
     name: 'shop',
     component: ShopPage
+ shopcartPage_goodsInfo
   },
   {
     path: '/shopcart',

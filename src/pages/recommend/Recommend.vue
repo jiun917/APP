@@ -13,6 +13,7 @@
         style="height: 15rem; width: 100%;"
         >
             <div class="q-pa-md  items-start q-gutter-md shop-item">
+ shopInformation_header
                 <q-card class="my-card">
                     <q-img src="https://cdn.quasar.dev/img/chicken-salad.jpg" />
                     <span class="material-icons heart" 
@@ -20,6 +21,28 @@
                         @click="this.click_like()"
                         >
                         favorite
+
+            <q-card class="my-card">
+                <q-img src="https://cdn.quasar.dev/img/chicken-salad.jpg" />
+                <span class="material-icons heart">
+                    favorite
+                </span>
+                <q-card-section >
+                <q-btn
+                round
+                color="yellow"
+                icon="place"
+                class="absolute"
+                style="top: 0; right: 0.24rem; transform: translateY(-80%)"
+                />
+                <div class="row no-wrap items-center">
+                    <div class="col  ellipsis text-bold">
+                    肯德基
+                    </div>
+                    <span class="text-bold grade">5.0</span>
+                    <span class="material-icons icon-start">
+                        star
+ master
                     </span>
                     <q-card-section >
                     <q-btn
