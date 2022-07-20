@@ -12,7 +12,7 @@
             </div>
             <div class="shop">
                 <div class="shop_name">
-                    <div class="name">KFC</div>
+                    <div class="name">肯心基</div>
                     <div class="detail">
                         <div class="time">20-30 min</div>
                         <div class="distance">5km Restaurant</div>
@@ -27,7 +27,7 @@
         </div>
         <div class="goods_list">
             <div class="goods_title">
-                <div class="slogan">"吮指美味樂無窮"</div>
+                <div class="slogan">"肯心肯心好心基"</div>
                 <div class="collection">
                         <span 
                         class="material-icons heart" 
@@ -90,13 +90,14 @@
             </q-scroll-area>
         </div>
 
-        <div class="shopCart">
-            <div class="shopcartnum" v-show="shopcartnum>0">
-                <span class="number">{{shopcartnum}}</span>
-            </div> 
-            <div class="word">前往購物車</div>
-        </div>
-
+        <router-link to="/shopcart">
+            <div class="shopCart" @click="addOrder">
+                <div class="shopcartnum" v-show="shopcartnum>0">
+                    <span class="number">{{shopcartnum}}</span>
+                </div> 
+                <div class="word" >前往購物車</div>
+            </div>
+        </router-link>
         <shop-goods 
         :goodsItem="selectgoods" 
         :options="option" 
@@ -121,9 +122,10 @@ export default {
             isselectgoods:false,
             selectgoods: [],
             option:[],
+            order:[],
             shopcartnum:'',
             goods:[
-                {name:'原味蛋塔',introduce:'蛋塔外酥內嫩',price:'39',rating:4,isselect:true,
+                {name:'原味蛋塔',introduce:'蛋塔外酥內嫩',price:'39',rating:4,
                     options:[
                         [
                             { name:"選擇1",label: '選項11', value: '11',color: 'yellow' },
@@ -136,7 +138,7 @@ export default {
                             { name:"選擇2",label: '選項23', value: '23', color: 'yellow' }
                         ]
                     ]},
-                {name:'紐澳良烤全雞',introduce:'香嫩多汁，雞巴毛',price:'250',rating:5,isselect:true,
+                {name:'紐澳良烤全雞',introduce:'香嫩多汁，雞巴毛',price:'250',rating:5,
                     options:[
                         [
                             { name:"選擇1",label: '選項11', value: '11',color: 'yellow' },
@@ -149,7 +151,7 @@ export default {
                             { name:"選擇2",label: '選項23', value: '23', color: 'yellow' }
                         ],
                     ]},
-                {name:'義式香草紙包雞',introduce:'香噴噴，從義大利空運來台',price:'900',rating:3,isselect:true,
+                {name:'義式香草紙包雞',introduce:'香噴噴，從義大利空運來台',price:'900',rating:3,
                     options:[
                         [
                             { name:"選擇1",label: '選項11', value: '11',color: 'yellow' },
@@ -162,7 +164,7 @@ export default {
                             { name:"選擇2",label: '選項23', value: '23', color: 'yellow' }
                         ],
                     ]},
-                {name:'烤滷豬',introduce:'小火慢烤，低溫熟成',price:'3000',rating:4,isselect:true,
+                {name:'烤滷豬',introduce:'小火慢烤，低溫熟成',price:'3000',rating:4,
                     options:[
                         [
                             { name:"選擇1",label: '選項11', value: '11',color: 'yellow' },
@@ -175,7 +177,7 @@ export default {
                             { name:"選擇2",label: '選項23', value: '23', color: 'yellow' }
                         ],
                     ]},
-                {name:'薯條',introduce:'馬鈴薯做的',price:'45',rating:5,isselect:true,
+                {name:'薯條',introduce:'馬鈴薯做的',price:'45',rating:5,
                     options:[
                         [
                             { name:"選擇1",label: '選項11', value: '11',color: 'yellow' },
@@ -217,8 +219,13 @@ export default {
         },
         addshopcart(shopcart) {
             this.isselectgoods = false
-            this.shopcartnum = shopcart
+            this.order=shopcart
+            this.shopcartnum = shopcart.length
+        },
+        addOrder() {
+            this.$store.dispatch('getOrder',this.order)
         }
+        
     }
 }
 </script>
@@ -245,12 +252,15 @@ export default {
                 border-radius: 100%
                 text-align: center
                 color: #FFBD09
-                font-size: 0.4rem
+                
                 .number
                     position: absolute
                     top: 50%
                     left: 50%
                     transform: translate(-50%,-50%)
+                    font-size: 0.4rem
+                    font-weight: bold
+                    
             .word
                 color: #fff
                 font-weight: bold
