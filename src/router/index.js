@@ -8,6 +8,9 @@ import PopularPage from '@/pages/popular/Popular.vue'
 import RecommendPage from '@/pages/recommend/Recommend.vue'
 import SearchPage from '@/pages/search/Search.vue'
 import ShopPage from '@/pages/shop/Shop.vue'
+import ShopcartPage from '@/pages/shopcart/Shopcart.vue'
+
+
 const routes = [
   {
     path: '/',
@@ -53,6 +56,11 @@ const routes = [
     path: '/shop',
     name: 'shop',
     component: ShopPage
+  },
+  {
+    path: '/shopcart',
+    name: 'shopcart',
+    component: ShopcartPage
   }
   // {
   //   path: '/about',

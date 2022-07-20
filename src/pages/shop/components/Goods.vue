@@ -67,10 +67,7 @@
 </transition>
 </template>
 
-
 <script>
-
-
 export default {
     name: 'ShopGoods',
     data() {
@@ -81,6 +78,7 @@ export default {
             selected: [],
             select: [],
             goodscount: 1,
+            
         }
     },
     props: {
@@ -93,21 +91,26 @@ export default {
         isgoback() {
             this.select=[]
             this.goodscount=1
-            this.$emit("addshopcart",this.selected.length) 
+            this.$emit("addshopcart",this.selected) 
         },
         onSubmit(evt) {
             const formData = new FormData(evt.target)
-            const submitResult = []
+            
+            const select = []
+            
             this.alert = false
             this.submitEmpty = false
-            submitResult.push(this.goodsItem.name,this.goodscount)
+            // submitResult.push({name:this.goodsItem.name,quantity:this.goodscount,price:this.goodsItem.price})
+            // submitResult.push(this.goodsItem.name,this.goodscount)
             for(const [name,value] of formData.entries()) {
-                submitResult.push({
+                select.push({
                     name,
                     value
                 })
             }
-           
+            const info = {name:this.goodsItem.name,quantity:this.goodscount,price:this.goodsItem.price,select:select}
+            // submitResult.push({name:this.goodsItem.name,quantity:this.goodscount,price:this.goodsItem.price,select:select})
+          
             for(var i=0;i<this.options.length;i++)
             {
                 if(!this.select[i])
@@ -118,16 +121,17 @@ export default {
                     
                 }
             }
-            console.log(submitResult)
+            
             if(!this.alert && !this.submitEmpty)
             {
-                this.selected.push(submitResult)
+                this.selected.push(info)
                 this.alert = false
                 this.submitEmpty = false
                 this.select = []
                 this.goodscount = 1
-                this.$emit("addshopcart",this.selected.length) 
+                this.$emit("addshopcart",this.selected) 
                 console.log(this.selected)
+                
             }
         },
         addgoodsconut() {

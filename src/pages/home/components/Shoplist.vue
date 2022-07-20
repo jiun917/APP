@@ -7,7 +7,7 @@
     :slidesPerView="2"
     :spaceBetween="100"
     > 
-      <swiper-slide>
+    <swiper-slide>
         <router-link to="/shop">
           <div class="q-pa-md  items-start q-gutter-md ">
             <q-card class="my-card">
