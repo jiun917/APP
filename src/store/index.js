@@ -18,6 +18,9 @@ export default createStore({
     },
     cutquantity(state,target){
       state.order[target].quantity--
+    },
+    removegoods(state,target){
+      state.order.splice(target,1)
     }
   },
   actions: {
@@ -30,7 +33,11 @@ export default createStore({
     },
     getcutquantity(context,target){
       context.commit('cutquantity',target)
+    },
+    getremovegoods(context,target){
+      context.commit('removegoods',target)
     }
+    
   },
   modules: {
   }
