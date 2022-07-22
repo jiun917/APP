@@ -30,7 +30,7 @@
             >
             <div class="goodslist" v-for="(item,index) in order" :key="index">
                 <div class="goods_quantity">
-                    <q-fab  v-model="test" :label=item.quantity  padding="xs" direction="right">
+                    <q-fab   :label=item.quantity  padding="xs" direction="right">
                         <q-fab-action  padding="xs" color="yellow" @click="cutClick(index)" icon=" remove_circle_outline" />
                         <q-fab-action  padding="xs" color="yellow" @click="addClick(index)" icon="add_circle_outline" />
                     </q-fab>
@@ -39,10 +39,38 @@
                 <div class="price">${{item.quantity*item.price}}</div>
             </div>
             </q-scroll-area>
-            
-            
         </div>
-        
+        <div class="points">
+            <div class="mypoint">
+                你目前有：
+                <div class="circle">
+                    <span class="number">{{points}}</span>
+                </div>
+                點
+                <div class="useDiscount" :class="{ nodiscount: isdiscount }" @click="use_discount">
+                    <div v-show="!isdiscount">使用折扣</div>    
+                    <div v-show="isdiscount">不使用折扣</div>
+                </div>
+            </div>
+        </div>
+        <div class="totalprice">
+            <div class="nodiscount_price">
+                <span>小計</span>
+                <span class="number">${{total}}</span>
+            </div>
+            <div class="discount_price">
+                <span>折扣金額</span>
+                <span class="number">${{usepoint}}</span>
+            </div>
+            <div class="divider"></div>
+            <div class="total">
+                <span>總金額</span>
+                <span class="number">${{total-usepoint}}</span>
+            </div>
+        </div>
+        <div class="submit">
+            <div class="submit_button">送出訂單</div>
+        </div>
     </div>
     <!-- <div v-for="(item,index) in order" :key="index">
         {{item[0].name}}{{item[0].value}}
@@ -52,32 +80,55 @@
 <script>
 export default {
     name: 'ShopcartPage',
-    data() {
-        return {
-            test: false,
-            
+    data(){
+        return{
+            points: 25,
+            usepoint: 0,
+            isdiscount: false
         }
     },
     computed: {
         order() {
             return this.$store.getters.order
         },
-        
-        
+        total() {
+            var totalprice = 0
+            for(var i = 0; i<this.order.length; i++)
+            {
+                totalprice += this.order[i].quantity*this.order[i].price
+            }
+            return totalprice
+        }
     },
     methods: {
         cutClick(target){
-            this.test = true
             if(this.$store.getters.order[target].quantity>0)
             {
                 this.$store.dispatch('getcutquantity',target)
             }
-                
+            if(this.$store.getters.order[target].quantity<1)
+            {
+                this.$store.dispatch('getremovegoods',target)
+            }
+            
         },
         addClick(target){
-            this.test = true
             this.$store.dispatch('getaddquantity',target)
+        },
+        use_discount(){
+            if(this.isdiscount)
+            {
+                this.usepoint = 0
+                this.isdiscount = !this.isdiscount
+            }else
+            {
+                this.usepoint = this.points
+                this.isdiscount = !this.isdiscount
+            }
+            
         }
+
+        
     },
     
     
@@ -144,10 +195,78 @@ export default {
                 flex-grow: 1
             .goods_quantity 
                 flex-grow: 1
-            
+    
+    .points
+        position: relative
+        display: flex
+        flex-direction: column
+        margin: 0.58rem 0.6rem
+        .circle
+            position: relative
+            height: 0.42rem
+            width: 0.42rem
+            border-radius: 50%
+            background-color: #FFBD09
+            margin-right: 0.1rem
+            .number
+                position: absolute
+                top: 50%
+                left: 50%
+                transform: translate(-50%,-50%)
+        .mypoint
+            display: flex
+            flex-direction: row
+            align-items: center
+            align-content: center
+            padding: 0.1rem
+            .useDiscount
+                position: absolute
+                right: 0
+                top: 0
+                width: 2.84rem
+                padding: 0.15rem
+                background-color: #FFBD09
+                border-radius: 0.5rem
+                text-align: center
+            .nodiscount
+                background-color: #C0C0C0
+    .totalprice
+        background-color: white
+        margin: 0.84rem 0.3rem
+        padding: 0.34rem
+        width: 6.9rem
+        height: 3.04rem
+        font-size:0.4rem
+        font-weight: bold
+        .number
+            color: #FFBD09
+        .nodiscount_price
+            display: flex
+            justify-content: space-between
+            margin-bottom: 0.3rem
+        .discount_price
+            display: flex
+            justify-content: space-between
+            margin-bottom: 0.3rem
+        .divider 
+            margin: 0.3rem 0 0 0
+            height: 0.05rem
+            background-color: #FFBD09
+        .total
+            display: flex
+            justify-content: space-between
+            margin-top: 0.3rem
            
-            
-            
+    .submit
+        display: flex
+        justify-content: center        
+        .submit_button
+            width: 3.04rem
+            padding: 0.15rem
+            background-color: #FFBD09
+            border-radius: 0.5rem
+            text-align: center
+
 
         
 </style>

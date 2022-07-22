@@ -118,19 +118,20 @@ export default {
                     this.alert = true
                     this.submitEmpty = true
                     this.select[i]=''
-                    
+                    console.log('sub='+this.submitEmpty+',alert='+this.alert)
                 }
             }
             
             if(!this.alert && !this.submitEmpty)
             {
+                console.log('sub='+this.submitEmpty+',alert='+this.alert)
                 this.selected.push(info)
                 this.alert = false
                 this.submitEmpty = false
                 this.select = []
                 this.goodscount = 1
                 this.$emit("addshopcart",this.selected) 
-                console.log(this.selected)
+                // console.log(this.selected)
                 
             }
         },
